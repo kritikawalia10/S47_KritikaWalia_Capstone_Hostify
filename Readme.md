@@ -49,3 +49,5 @@ Roadmap -
  10. At last, the project is ready.
  
 
+Low fid Design : "https://www.figma.com/file/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-Fid?type=design&node-id=3%3A41&mode=design&t=ShqRGtQmxBE4Q092-1"
+
