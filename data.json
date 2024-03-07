@@ -2,29 +2,29 @@
     {
         "hostelName" : "GH",
         "roomsAvail" : "10",
-        "roomType" : "Single",
-        "price" : "12000",
+        "roomType" : "Single AC & Non AC",
+        "price" : "12000 - 15000",
         "imgUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50I9df_yGBUiUwwZH8bhrb0NfrqIewBLultKjoXMH76nSLnfO0BHeVSwUhg&s"
     },
     {
         "hostelName" : "BH1",
         "roomsAvail" : "14",
-        "roomType" : "Single",
-        "price" : "12000",
+        "roomType" : "Single AC & Non AC",
+        "price" : "12000 - 15000",
         "imgUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50I9df_yGBUiUwwZH8bhrb0NfrqIewBLultKjoXMH76nSLnfO0BHeVSwUhg&s"
      },
     {
         "hostelName" : "BH2",
         "roomsAvail" : "17",
-        "roomType" : "Single",
-        "price" : "12000",
+        "roomType" : "Single AC & Non AC",
+        "price" : "12000 - 15000",
         "imgUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50I9df_yGBUiUwwZH8bhrb0NfrqIewBLultKjoXMH76nSLnfO0BHeVSwUhg&s"
     },
     {
         "hostelName" : "BH3",
         "roomsAvail" : "21",
-        "roomType" : "Single",
-        "price" : "12000",
+        "roomType" : "Single AC & Non AC",
+        "price" : "12000 - 15000",
         "imgUrl" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50I9df_yGBUiUwwZH8bhrb0NfrqIewBLultKjoXMH76nSLnfO0BHeVSwUhg&s"
     }
 ]
