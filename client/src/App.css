@@ -1,0 +1,79 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    align-items: center;
+    background-color: black;
+    color: white;
+    height: 15vh;
+    position: sticky;
+    top: 0;
+}
+.pages{
+    display: flex;
+}
+.active{
+    margin: 10%;
+}
+button{
+    line-height: 36px;
+    margin: 13px;
+    width: 80px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+.buttons{
+    margin: 4%;
+}
+button:hover{
+    cursor: pointer;
+    background-color: rgb(241, 159, 246);
+    transition: 0.5s;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0px 0px 2px 2px white;
+}
+.home{
+    height: 120vh;
+}
+.info{
+    background-image: url("https://img.freepik.com/premium-photo/cream-color-wall-empty-room-with-plants-wooden-floor-3d-rendering_41470-4359.jpg?w=826");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: black;
+    padding: 25px;
+    height: 80vh;
+    text-align: center;
+}
+body{
+    margin: 10px;
+}
+.info p{
+    font-size: 22px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 10% ;
+    padding-left:50% ;
+}
+.info h1{
+    font-size: 40px;
+}
+.info h2{
+    font-size: 30px;
+}
+nav h2{
+    cursor: pointer;
+}
+.footer{
+    text-align: center;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.active:hover{
+    color: rgba(211, 207, 207, 0.97);
+    transition: 0.5s;
+}
