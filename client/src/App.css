@@ -1,3 +1,7 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
 nav{
     display: flex;
     flex-direction: row;
@@ -7,7 +11,7 @@ nav{
     align-items: center;
     background-color: black;
     color: white;
-    height: 15vh;
+    height: 11vh;
 }
 .pages{
     display: flex;
@@ -22,7 +26,7 @@ nav{
 }
 button{
     line-height: 36px;
-    margin: 13px;
+    margin: 10px;
     width: 80px;
     border-radius: 20px;
     font-weight: bold;
@@ -50,9 +54,7 @@ button:hover{
     height: 80vh;
     text-align: center;
 }
-body{
-    margin: 10px;
-}
+
 .info p{
     font-size: 22px;
     line-height: 40px;
@@ -71,14 +73,14 @@ nav h2{
 }
 .footer{
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     background-color: black;
     color: white;
-    padding: 5px;
+    padding: 3px;
 }
 .active:hover{
     color: rgba(14, 79, 243, 0.97);
-    transition: 0.5s;
+    transition: 0.3s;
 }
 .about{
     background-color: rgb(238, 208, 169);
@@ -110,4 +112,40 @@ input{
 }
 a{
     text-decoration: none;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%;
+    margin-top: 2%;
+    align-items: center;
+    width: 50%;
+    border-radius: 18px;
+    border: 1px solid black;
+    padding: 2%;
+    font-weight: bold;
+    box-shadow: 0px 2px 2px 0px;
+    outline: none;
+    background-color: rgb(133, 166, 238);
+}
+.bar{
+    background-color: rgb(188, 186, 186);
+}
+.main input{
+    margin-top: 5%;
+    margin-left: 44%;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: left;
+    color: rgb(41, 40, 40);
+    height: 10vh;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.login input{
+    margin: 10px;
+    text-align: center;
 }
