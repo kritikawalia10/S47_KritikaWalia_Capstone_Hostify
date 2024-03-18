@@ -126,6 +126,24 @@ a{
     font-weight: bold;
     box-shadow: 0px 2px 2px 0px;
     outline: none;
+    background-color: rgb(133, 166, 238);
+}
+.bar{
+    background-color: rgb(188, 186, 186);
+}
+.main input{
+    margin-top: 5%;
+    margin-left: 44%;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: left;
+    color: rgb(41, 40, 40);
+    height: 10vh;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 .login input{
     margin: 10px;

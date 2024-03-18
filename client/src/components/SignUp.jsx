@@ -6,7 +6,7 @@ function SignUp() {
     <>
     <form>
     <div className='login'>
-      <h2>Create a new account</h2>
+      <h3>Create a new account</h3>
       <div>
       <label htmlFor="name"> Username</label>
       <input type="text"/>
