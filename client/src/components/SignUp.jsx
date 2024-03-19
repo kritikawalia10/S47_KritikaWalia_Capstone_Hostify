@@ -1,34 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function SignUp() {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("Confirm Password:", confirmPassword);
+    
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
+
   return (
     <>
-    <form>
+    <form onSubmit={handleSubmit}>
     <div className='login'>
       <h3>Create a new account</h3>
       <div>
       <label htmlFor="name"> Username</label>
-      <input type="text"/>
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
       </div>
 
       <div>
       <label htmlFor="email">Email</label>
-      <input type="email"/>
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
       </div>
       
       <div>
       <label htmlFor="password">Password</label>
-      <input type="password"/>
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
       </div>
 
       <div>
       <label htmlFor="password">Confirm Password</label>
-      <input type="password"/>
+      <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
       </div>
 
       <div>
-        <button>Sign Up</button>
+        <button type="submit">Sign Up</button>
       </div>
 
       <div>
