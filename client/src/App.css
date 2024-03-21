@@ -149,3 +149,10 @@ a{
     margin: 10px;
     text-align: center;
 }
+.card{
+    display: grid;
+    grid-template-rows: 30px 30px 30px;
+    grid-auto-rows: dense;
+    padding: 3%;
+    grid-gap: 2px;
+}
