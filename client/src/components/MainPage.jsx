@@ -6,7 +6,6 @@ function MainPage() {
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
 
-
   const filterData = (event) => {
     const query = event.target.value;
     if (query.trim() === '') {

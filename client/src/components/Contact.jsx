@@ -4,23 +4,23 @@ function Contact() {
   return (
     <div>
       <div className="contact">
-        <h1>Contact Us</h1>
+        <h1 style={{ textAlign: "center" }}>Contact Us</h1>
         <p>Thank you for choosing Hostify! We value your feedback and are here to assist you in any way we can. 
             Please don't hesitate to reach out to us if you have any questions, concerns, or suggestions.
         </p>
-                <h1>Support</h1>
+                <h3>Support</h3>
                 <p>If you require assistance with any aspect of our app, our support team is ready to help. 
                 Please email us at <a href="">support@hostifyapp.com</a> and we'll get back to you as soon as possible.
                 </p>
 
-                <h1>General Inquiries</h1>
+                <h3>General Inquiries</h3>
                 <p>For general inquiries, please email us at <a href="">support@hostifyapp.com</a>. We're here to help and are always happy to assist you.</p>
 
-                <h1>Feedback</h1>
+                <h3>Feedback</h3>
                 <p>We greatly value your feedback as it helps us improve our app and better serve your needs. 
                     Please share your thoughts with us at <a href="">feedback@hostifyapp.com</a>.</p>
 
-                <h1>Social Media</h1>
+                <h3>Social Media</h3>
 
                 <p>Connect with us on social media for updates, announcements, and more:
                 </p>

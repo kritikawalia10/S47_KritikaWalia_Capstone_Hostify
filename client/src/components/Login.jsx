@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Login() {
+
+  const inputRef = useRef();
+  const errRef = useRef();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [name, email, password]);
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // console.log("Name:", name);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
     
     setName('');
     setEmail('');
@@ -21,15 +34,16 @@ function Login() {
     <>
       <form onSubmit={handleSubmit}>
         <div className='login'>
+          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
           <h3>Login to your account</h3>
           <div>
             <label htmlFor="name">Username</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" id="name" value={name} ref={inputRef} onChange={(e) => setName(e.target.value)} />
           </div>
 
           <div>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" id="email" value={email}  onChange={(e) => setEmail(e.target.value)} />
           </div>
 
           <div>
