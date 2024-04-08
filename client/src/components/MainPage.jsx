@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function MainPage() {
-  const apiUrl = 'http://localhost:8080/';
+  const apiUrl = 'http://localhost:8080/data';
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
 
@@ -22,8 +22,12 @@ function MainPage() {
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl);
-        setData(response.data);
-        setOriginalData(response.data); 
+        if (Array.isArray(response.data)) {
+          setData(response.data);
+          setOriginalData(response.data); 
+        } else {
+          console.error('Invalid data format:', response.data);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -31,8 +35,11 @@ function MainPage() {
     fetchData();
   }, [apiUrl]);
 
+  const sortedData = [...data].sort((a, b) => a.id - b.id);
+
   return (
     <>
+      <div className="container">
       <div className="main">
         <div className="bar">
           <div className="head">
@@ -43,9 +50,17 @@ function MainPage() {
             <h3>Facilities</h3>
           </div>
         </div>
-        <div>
-          <input type="text" placeholder='Search...' onChange={filterData} />
-          {data && data.map((item, index) => {
+
+        <div className="data">
+        <input type="text" placeholder='Search...' onChange={filterData} />
+        <div className="button">
+          <button style={{backgroundColor: 'green', color: 'white'}}>Add +</button>
+        </div>
+        </div>
+
+        <div className="card-container">
+          
+          {sortedData && sortedData.map((item, index) => {
             return (
               <div className="card" key={index}>
                 <div>
@@ -53,11 +68,16 @@ function MainPage() {
                   <p>Available Rooms : {item.roomsAvail}</p>
                   <p>Room Type : {item.roomType}</p>
                   <p>Price : {item.price}</p>
+                  <img src={item.imgUrl} alt="" />
+                </div>
+                <div>
+                  <button className='book'>Book Now</button>
                 </div>
               </div>
             )
           })}
         </div>
+      </div>
       </div>
     </>
   )
