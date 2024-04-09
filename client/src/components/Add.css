@@ -1,0 +1,24 @@
+body{
+    background-image: linear-gradient(to right, #0c7df6, #88bcf3);
+}
+.add{
+    background-color: rgba(160, 217, 242, 0.491);
+    padding: 10px;
+    height: 65vh;
+    border-radius: 10px;
+    width: 40%;
+    margin-top: 2%;
+    margin-left: 30%;
+    text-align: center;
+    border: 1px solid black;
+}
+.add input{
+    line-height: 30px;
+    margin: 2%;
+    width: 280px;
+    border-radius: 12px;
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #b0ceed;
+}
