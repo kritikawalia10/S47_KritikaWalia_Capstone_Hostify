@@ -4,11 +4,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const cors = require('cors');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 
 app.use(express.json());
+app.use(cors())
 
 
 mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,6 +20,17 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: t
 
 
 const User = require('./models/User');
+app.get('/data', async (req, res) => {
+  try {
+    const collection = await mongoose.connection.collection('info_data');
+    const result = await collection.find({}).toArray();
+    res.send(result);
+    console.log('Result:', result);
+  } catch (err) {
+    console.error('Error querying MongoDB:', err);
+    res.status(500).json({ error: 'Error querying database' });
+  }
+});
 
 
 app.post('/login', async (req, res) => {

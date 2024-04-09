@@ -149,10 +149,54 @@ a{
     margin: 10px;
     text-align: center;
 }
-.card{
+.card-container {
+    margin: 2%;
     display: grid;
-    grid-template-rows: 30px 30px 30px;
-    grid-auto-rows: dense;
-    padding: 3%;
-    grid-gap: 2px;
-}
+    grid-template-columns: repeat(3, 340px); 
+    grid-auto-rows: auto; 
+    margin-left: 6%;
+    grid-gap: 20px;
+  }
+  
+  .card {
+    margin-top: 10px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    padding: 20px; 
+    background-color: rgb(252, 225, 225);
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px
+  }
+  .card:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: bold;
+    box-shadow: 0px 0px 4px 4px;
+  }
+  .book{
+    background-image: linear-gradient(to right, #007bff, #007bff); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: 90px;
+    border-radius: 14px;
+  }
+  .book:hover{
+    transform: rotate3d(1, 1, 1, 360deg);
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #227ad7, #033468); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: 90px;
+    border-radius: 14px;
+    box-shadow: 0px 0px 4px 4px white;
+  }
+  .data{
+    margin-top: 10px;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    padding: 20px; 
+  } 
