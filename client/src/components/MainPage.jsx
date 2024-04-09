@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
-  const apiUrl = 'http://localhost:8080/data';
+  const apiUrl = 'http://localhost:8080/';
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
 
@@ -17,6 +18,7 @@ function MainPage() {
     });
     setData(filteredData);
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +56,7 @@ function MainPage() {
         <div className="data">
         <input type="text" placeholder='Search...' onChange={filterData} />
         <div className="button">
-          <button style={{backgroundColor: 'green', color: 'white'}}>Add +</button>
+          <Link to='/add'><button style={{backgroundColor: 'green', color: 'white'}} >Add +</button></Link>
         </div>
         </div>
 

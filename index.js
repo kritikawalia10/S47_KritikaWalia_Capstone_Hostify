@@ -20,7 +20,7 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: t
 
 
 const User = require('./models/User');
-app.get('/data', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const collection = await mongoose.connection.collection('info_data');
     const result = await collection.find({}).toArray();
@@ -32,6 +32,12 @@ app.get('/data', async (req, res) => {
   }
 });
 
+app.post('/addData',(req,res)=>{
+  const {name,roomsAvailable,price,roomType} = req.body;
+  const data = new User({name,roomsAvailable,price,roomType});
+  data.save();
+  res.send('Data added successfully');
+})
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;

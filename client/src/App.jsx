@@ -8,6 +8,7 @@ import Contact from './components/Contact'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import MainPage from './components/MainPage'
+import Add from './components/Add'
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path = '/login' element={<Login/>}/>
         <Route path = '/signup' element={<SignUp/>}/>
         <Route path = '/main' element={<MainPage/>}/>
+        <Route path = '/add' element={<Add/>}/>
       </Routes>
       
     </>
