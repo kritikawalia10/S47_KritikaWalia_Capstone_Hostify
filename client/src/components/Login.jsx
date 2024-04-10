@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {GoogleLogin} from 'react-google-login';
 
 function Login() {
+
+  const clientId = "70314281965-8io920bulao023rl36gpcdb2bk2lb20d.apps.googleusercontent.com"
 
   const inputRef = useRef();
   const errRef = useRef();
