@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './Add.css';
+import axios from 'axios';
 
 function Add() {
+  let { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const [hostelData, setHostelData] = useState({
     name: '',
     roomsAvailable: '',
@@ -9,29 +13,26 @@ function Add() {
     roomType: ''
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setHostelData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+  const handleInput = (e) => {
+    e.persist();
+    setHostelData({ ...hostelData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, roomsAvailable, price, roomType } = hostelData;
-    const data = { name, roomsAvailable, price, roomType };
+    setLoading(true);
+
+    const data = {
+      name: hostelData.name,
+      roomsAvailable: hostelData.roomsAvailable,
+      price: hostelData.price,
+      roomType: hostelData.roomType
+    };
 
     try {
-      const response = await fetch('http://localhost:8080/addData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post(`http://localhost:8080/addData/${id}`, data);
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to add data');
       }
 
@@ -45,6 +46,8 @@ function Add() {
       console.log('Data added successfully');
     } catch (error) {
       console.error('Error adding data:', error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,17 +55,46 @@ function Add() {
     <div className='add'>
       <h2>Add a New Hostel</h2>
       <form onSubmit={handleSubmit}>
-        
-          <input type="text" name="name" value={hostelData.name} onChange={handleChange} placeholder='Hostel Name...' required />
-        <br />       
-          <input type="text" name="roomsAvailable" value={hostelData.roomsAvailable} onChange={handleChange} placeholder='Rooms Available...' required />
+        <input
+          type="text"
+          name="name"
+          value={hostelData.name}
+          onChange={handleInput}
+          placeholder='Hostel Name...'
+          required
+        />
         <br />
-          <input type="text"  name="roomType" value={hostelData.roomType} onChange={handleChange} placeholder='Room Type...' required />
+        <input
+          type="text"
+          name="roomsAvailable"
+          value={hostelData.roomsAvailable}
+          onChange={handleInput}
+          placeholder='Rooms Available...'
+          required
+        />
         <br />
-          <input type="text" name="price" value={hostelData.price} onChange={handleChange} placeholder='Price...' required />
+        <input
+          type="text"
+          name="roomType"
+          value={hostelData.roomType}
+          onChange={handleInput}
+          placeholder='Room Type...'
+          required
+        />
+        <br />
+        <input
+          type="text"
+          name="price"
+          value={hostelData.price}
+          onChange={handleInput}
+          placeholder='Price...'
+          required
+        />
         <br />
         <br />
-        <button type="submit" style={{backgroundColor: 'green', color: 'white'}}>Add</button>
+        <button type="submit" style={{ backgroundColor: 'green', color: 'white' }} disabled={loading}>
+          {loading ? 'Adding...' : 'Add'}
+        </button>
       </form>
     </div>
   );
