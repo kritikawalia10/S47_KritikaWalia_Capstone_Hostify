@@ -65,6 +65,9 @@ function MainPage() {
           {sortedData && sortedData.map((item, index) => {
             return (
               <div className="card" key={index}>
+                <div className="delete">
+                  <button>Delete</button>
+                </div>
                 <div>
                   <h3>Hostel : {item.hostelName}</h3>
                   <p>Available Rooms : {item.roomsAvail}</p>
@@ -72,8 +75,9 @@ function MainPage() {
                   <p>Price : {item.price}</p>
                   <img src={item.imgUrl} alt="" />
                 </div>
-                <div>
+                <div className='btn2'>
                   <button className='book'>Book Now</button>
+                  <button className='edit'>Edit</button>
                 </div>
               </div>
             )
