@@ -49,6 +49,6 @@ Roadmap -
  10. At last, the project is ready.
  
 
-Low fid Design : "https://www.figma.com/file/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-Fid?type=design&node-id=3%3A41&mode=design&t=ShqRGtQmxBE4Q092-1"
+Low fid Design : "https://www.figma.com/proto/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-Fid?node-id=3-41&starting-point-node-id=1%3A3"
 
 back-end deployment link : https://s47-kritikawalia-capstone-hostify-1.onrender.com/
