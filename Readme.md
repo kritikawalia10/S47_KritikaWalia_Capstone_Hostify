@@ -53,4 +53,4 @@ Low fid Design : "https://www.figma.com/file/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-
 
 back-end deployment link : https://s47-kritikawalia-capstone-hostify-1.onrender.com/
 
-Front-end deployed link : https://s47-kritika-walia-capstone-h-git-b03c53-kritika-walias-projects.vercel.app/
+Front-end deployed link : https://s47-kritika-walia-capstone-hostify.vercel.app/
