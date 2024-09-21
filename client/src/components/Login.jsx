@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {GoogleLogin} from 'react-google-login';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import {jwtDecode} from 'jwt-decode';
 
 function Login() {
-
-  const clientId = "70314281965-8io920bulao023rl36gpcdb2bk2lb20d.apps.googleusercontent.com"
-
   const inputRef = useRef();
   const errRef = useRef();
   const [name, setName] = useState('');
@@ -13,10 +11,11 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     inputRef.current.focus();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setErrMsg('');
@@ -24,46 +23,88 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    // console.log("Name:", name);
-    // console.log("Email:", email);
-    // console.log("Password:", password);
-    
     setName('');
     setEmail('');
     setPassword('');
   };
 
+  const handleGoogleSuccess = (response) => {
+    const decoded = jwtDecode(response.credential);
+    setUserInfo(decoded);
+    setSuccess(true);
+  };
+
+  const handleGoogleFailure = () => {
+    setErrMsg('Google Sign-In was unsuccessful. Try again.');
+  };
+
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className='login'>
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <h3>Login to your account</h3>
-          <div>
-            <label htmlFor="name">Username</label>
-            <input type="text" id="name" value={name} ref={inputRef} onChange={(e) => setName(e.target.value)} />
-          </div>
+    <form onSubmit={handleSubmit}>
+      <div className='login'>
+        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+        <h3>Login to your account</h3>
 
+        {success ? (
           <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={email}  onChange={(e) => setEmail(e.target.value)} />
+            <h4>Welcome, {userInfo?.name}!</h4>
+            <p>Email: {userInfo?.email}</p>
+            <button onClick={() => {
+              googleLogout();
+              setUserInfo(null);
+              setSuccess(false);
+            }}>Logout</button>
           </div>
+        ) : (
+          <>
+            <div>
+              <label htmlFor="name">Username</label>
+              <input 
+                type="text" 
+                id="name" 
+                value={name} 
+                ref={inputRef} 
+                onChange={(e) => setName(e.target.value)} 
+              />
+            </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                value={email}  
+                onChange={(e) => setEmail(e.target.value)} 
+              />
+            </div>
 
-          <div>
-            <button type="submit">Login</button>
-          </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+              />
+            </div>
 
-          <div>
-            <h4>Don't have an account? <Link to='/signup' style={{ textDecoration: 'none', color: 'blue' }}>Sign Up</Link></h4>
-          </div>
-        </div>
-      </form>
-    </>
+            <div>
+              <button type="submit">Login</button>
+            </div>
+
+            <div>
+              <h4>Don't have an account? <Link to='/signup'>Sign Up</Link></h4>
+            </div>
+
+            <div style={{ marginTop: '20px' }}>
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onFailure={handleGoogleFailure}
+              />
+            </div>
+          </>
+        )}
+      </div>
+    </form>
   );
 }
 
