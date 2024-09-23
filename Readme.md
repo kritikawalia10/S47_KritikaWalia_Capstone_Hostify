@@ -52,3 +52,5 @@ Roadmap -
 Low fid Design : "https://www.figma.com/file/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-Fid?type=design&node-id=3%3A41&mode=design&t=ShqRGtQmxBE4Q092-1"
 
 back-end deployment link : https://s47-kritikawalia-capstone-hostify-1.onrender.com/
+
+Front-end deployed link : https://s47-kritika-walia-capstone-hostify.vercel.app/
