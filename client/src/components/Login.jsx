@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import {jwtDecode} from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
+
 
 function Login() {
-
+  
   const inputRef = useRef();
   const errRef = useRef();
   const [name, setName] = useState('');
@@ -12,7 +13,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
-  const [userInfo, setUserInfo] = useState(null); // State to store Google user info
+
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -24,11 +26,12 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    
+
     setName('');
     setEmail('');
     setPassword('');
   };
+
 
   // Callback for Google Login Success
   const handleGoogleSuccess = (response) => {
@@ -38,11 +41,13 @@ function Login() {
   };
 
   // Callback for Google Login Failure
+
   const handleGoogleFailure = () => {
     setErrMsg('Google Sign-In was unsuccessful. Try again.');
   };
 
   return (
+
     <>
       <form onSubmit={handleSubmit}>
         <div className='login'>
@@ -111,6 +116,7 @@ function Login() {
         </div>
       </form>
     </>
+
   );
 }
 
