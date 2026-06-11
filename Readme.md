@@ -11,7 +11,7 @@ Hostify is a modern, AI-powered accommodation discovery and booking platform bui
 | Surface | Link |
 |---|---|
 | Frontend (Vercel) | [s47-kritika-walia-capstone-hostify.vercel.app](https://s47-kritika-walia-capstone-hostify.vercel.app/) |
-| Backend (Render) | [s47-kritikawalia-capstone-hostify-1.onrender.com](https://s47-kritikawalia-capstone-hostify-1.onrender.com/) |
+| Backend (Render) | [hostify-backend-8w9y.onrender.com](https://hostify-backend-8w9y.onrender.com/) |
 | Figma Low-Fid | [View Design](https://www.figma.com/file/Sf5kgUH7a2XdBXO0YbErOP/Hostify-Low-Fid) |
 
 ---
