@@ -1,45 +1,61 @@
-import React from 'react'
+import React from 'react';
+import { FaEnvelope, FaMapMarkerAlt, FaShareAlt, FaPhoneAlt } from 'react-icons/fa';
 
 function Contact() {
   return (
-    <div>
-      <div className="contact">
-        <h1 style={{ textAlign: "center" }}>Contact Us</h1>
-        <p>Thank you for choosing Hostify! We value your feedback and are here to assist you in any way we can. 
-            Please don't hesitate to reach out to us if you have any questions, concerns, or suggestions.
-        </p>
-                <h3>Support</h3>
-                <p>If you require assistance with any aspect of our app, our support team is ready to help. 
-                Please email us at <a href="">support@hostifyapp.com</a> and we'll get back to you as soon as possible.
+    <div className="info-page-container fade-in">
+      <div className="info-card contact-grid">
+        <div className="contact-info-section">
+          <h1>Contact Us</h1>
+          <p>
+            Thank you for choosing Hostify! We value your feedback and are here to assist you in any way we can. Please reach out to us if you have questions, partnership queries, or security concerns.
+          </p>
+
+          <div className="contact-detail-list">
+            <div className="contact-detail-item">
+              <FaEnvelope className="c-icon" />
+              <div>
+                <h4>Support Email</h4>
+                <p><a href="mailto:support@hostifyapp.com">support@hostifyapp.com</a></p>
+              </div>
+            </div>
+            
+            <div className="contact-detail-item">
+              <FaPhoneAlt className="c-icon" />
+              <div>
+                <h4>Call Support</h4>
+                <p>+91 98765 43210 (Mon-Sat, 9AM - 6PM)</p>
+              </div>
+            </div>
+
+            <div className="contact-detail-item">
+              <FaMapMarkerAlt className="c-icon" />
+              <div>
+                <h4>Headquarters</h4>
+                <p>
+                  Hostify Headquarters<br />
+                  123 Main Street, Sector 21<br />
+                  Gurugram, Haryana, 122001, India
                 </p>
+              </div>
+            </div>
 
-                <h3>General Inquiries</h3>
-                <p>For general inquiries, please email us at <a href="">support@hostifyapp.com</a>. We're here to help and are always happy to assist you.</p>
-
-                <h3>Feedback</h3>
-                <p>We greatly value your feedback as it helps us improve our app and better serve your needs. 
-                    Please share your thoughts with us at <a href="">feedback@hostifyapp.com</a>.</p>
-
-                <h3>Social Media</h3>
-
-                <p>Connect with us on social media for updates, announcements, and more:
+            <div className="contact-detail-item">
+              <FaShareAlt className="c-icon" />
+              <div>
+                <h4>Social Network</h4>
+                <p className="social-links">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a> | {' '}
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> | {' '}
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
                 </p>
-
-                <li><a href="https://www.instagram.com/">Instagram</a><br/></li>
-                <li><a href="https://www.linkedin.com">LinkedIn</a><br/></li>
-                <li><a href="https://www.github.com">GitHub</a></li>
-                
-                <h4>
-                Hostify Headquarters <br/>
-                123 Main Street<br/>
-                Gurugram, Haryana, 122001<br/>
-                India 
-                </h4>
-
-
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

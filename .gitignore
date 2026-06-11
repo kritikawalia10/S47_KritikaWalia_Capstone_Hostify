@@ -1,2 +1,21 @@
-node_modules
+# ── Dependencies ──────────────────────────
+node_modules/
 package-lock.json
+
+# ── Environment / Secrets ─────────────────
+.env
+.env.local
+.env.development
+.env.production
+server/.env
+client/.env
+
+# ── Build Outputs ─────────────────────────
+client/dist/
+client/build/
+
+# ── OS / Editor Files ─────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
