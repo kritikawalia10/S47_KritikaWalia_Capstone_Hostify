@@ -1,122 +1,107 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import {jwtDecode} from 'jwt-decode';
-
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
 
 function Login() {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
   
-  const inputRef = useRef();
-  const errRef = useRef();
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [userInfo, setUserInfo] = useState(null);
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  useEffect(() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     setErrMsg('');
-  }, [name, email, password]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
+    try {
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/auth/login', {
+        email,
+        password
+      });
 
-    setName('');
-    setEmail('');
-    setPassword('');
+      login(response.data.token);
+      navigate('/main');
+    } catch (err) {
+      console.error(err);
+      setErrMsg(err.response?.data?.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-
-  // Callback for Google Login Success
   const handleGoogleSuccess = (response) => {
-    const decoded = jwtDecode(response.credential); // Decode JWT token
-    setUserInfo(decoded); // Set user info
-    setSuccess(true);
+    login(response.credential);
+    navigate('/main');
   };
-
-  // Callback for Google Login Failure
 
   const handleGoogleFailure = () => {
     setErrMsg('Google Sign-In was unsuccessful. Try again.');
   };
 
   return (
+    <div className="login-page">
+      <div className="login-card fade-in">
+        <h2>Welcome Back</h2>
+        <p className="subtitle">Sign in to find your perfect stay</p>
 
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className='login'>
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <h3>Login to your account</h3>
+        {errMsg && <p className="errmsg">{errMsg}</p>}
 
-          {success ? (
-            <div>
-              <h4>Welcome, {userInfo?.name}!</h4>
-              <p>Email: {userInfo?.email}</p>
-              <button onClick={() => {
-                googleLogout();
-                setUserInfo(null);
-                setSuccess(false);
-              }}>Logout</button>
-            </div>
-          ) : (
-            <>
-              <div>
-                <label htmlFor="name">Username</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  value={name} 
-                  ref={inputRef} 
-                  onChange={(e) => setName(e.target.value)} 
-                />
-              </div>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email"><FaEnvelope /> Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              placeholder="e.g. john@example.com"
+              value={email}  
+              onChange={(e) => setEmail(e.target.value)} 
+              required
+            />
+          </div>
 
-              <div>
-                <label htmlFor="email">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  value={email}  
-                  onChange={(e) => setEmail(e.target.value)} 
-                />
-              </div>
+          <div className="form-group">
+            <label htmlFor="password"><FaLock /> Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              placeholder="••••••••"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required
+            />
+          </div>
 
-              <div>
-                <label htmlFor="password">Password</label>
-                <input 
-                  type="password" 
-                  id="password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
-                />
-              </div>
+          <button type="submit" className="btn-auth-submit" disabled={loading}>
+            {loading ? 'Signing in...' : <><FaSignInAlt /> Login</>}
+          </button>
+        </form>
 
-              <div>
-                <button type="submit">Login</button>
-              </div>
-
-              <div>
-                <h4>Don't have an account? <Link to='/signup' style={{ textDecoration: 'none', color: 'blue' }}>Sign Up</Link></h4>
-              </div>
-
-              <div style={{ marginTop: '20px' }}>
-                <GoogleLogin
-                  onSuccess={handleGoogleSuccess}
-                  onError={handleGoogleFailure}
-                />
-              </div>
-            </>
-          )}
+        <div className="auth-divider">
+          <span>OR</span>
         </div>
-      </form>
-    </>
 
+        <div className="google-btn-container">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+            theme="filled_blue"
+            size="large"
+            text="signin_with"
+            shape="pill"
+          />
+        </div>
+
+        <p className="auth-footer-text">
+          Don't have an account? <Link to="/signup" className="auth-link">Sign Up</Link>
+        </p>
+      </div>
+    </div>
   );
 }
 

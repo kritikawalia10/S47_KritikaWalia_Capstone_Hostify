@@ -1,79 +1,147 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaUser, FaEnvelope, FaLock, FaUserTag } from 'react-icons/fa';
 
 function SignUp() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('user'); // Default to regular user
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
+    setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8080/register', {
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/auth/register', {
+        name,
         email,
-        password
+        password,
+        role
       });
 
       setSuccess(response.data.message);
-      setError('');
-
+      
+      // Reset form
       setName('');
       setEmail('');
       setPassword('');
       setConfirmPassword('');
+      setRole('user');
+
+      // Auto redirect to login after 2 seconds
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (err) {
-      setError(err.response.data.message || 'An error occurred');
-      setSuccess('');
+      console.error(err);
+      setError(err.response?.data?.message || 'An error occurred during registration.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className='login'>
-          <h3>Create a new account</h3>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {success && <p style={{ color: 'green' }}>{success}</p>}
-          <div>
-            <label htmlFor="name">Username</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+    <div className="login-page">
+      <div className="login-card fade-in">
+        <h2>Create Account</h2>
+        <p className="subtitle">Sign up to get started with Hostify</p>
+
+        {error && <p className="errmsg">{error}</p>}
+        {success && <p className="successmsg">{success} Redirecting to login...</p>}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="name"><FaUser /> Full Name</label>
+            <input 
+              type="text" 
+              id="name"
+              placeholder="e.g. John Doe"
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+              required
+            />
           </div>
 
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <div className="form-group">
+            <label htmlFor="email"><FaEnvelope /> Email Address</label>
+            <input 
+              type="email" 
+              id="email"
+              placeholder="e.g. john@example.com"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required
+            />
           </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <div className="form-group">
+            <label htmlFor="role"><FaUserTag /> Account Type</label>
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-btn ${role === 'user' ? 'active' : ''}`}
+                onClick={() => setRole('user')}
+              >
+                Guest (Find Stays)
+              </button>
+              <button
+                type="button"
+                className={`role-btn ${role === 'owner' ? 'active' : ''}`}
+                onClick={() => setRole('owner')}
+              >
+                Host (List Stays)
+              </button>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <div className="form-group">
+            <label htmlFor="password"><FaLock /> Password</label>
+            <input 
+              type="password" 
+              id="password"
+              placeholder="••••••••"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required
+            />
           </div>
 
-          <div>
-            <button type="submit">Sign Up</button>
+          <div className="form-group">
+            <label htmlFor="confirmPassword"><FaLock /> Confirm Password</label>
+            <input 
+              type="password" 
+              id="confirmPassword"
+              placeholder="••••••••"
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              required
+            />
           </div>
 
-          <div>
-            <h4>Already have an account? <Link to='/login' style={{ textDecoration: 'none', color: 'blue' }}>Login</Link></h4>
-          </div>
-        </div>
-      </form>
-    </>
+          <button type="submit" className="btn-auth-submit" disabled={loading}>
+            {loading ? 'Creating Account...' : 'Sign Up'}
+          </button>
+        </form>
+
+        <p className="auth-footer-text">
+          Already have an account? <Link to="/login" className="auth-link">Login</Link>
+        </p>
+      </div>
+    </div>
   );
 }
 
