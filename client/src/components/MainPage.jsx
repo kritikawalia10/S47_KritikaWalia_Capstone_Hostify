@@ -52,21 +52,21 @@ function MainPage() {
       
       if (user.role === 'owner') {
         // Fetch only host's own listings
-        const resHostels = await axios.get('${import.meta.env.VITE_API_URL}/api/hostels/my-listings', { headers });
+        const resHostels = await axios.get(`${import.meta.env.VITE_API_URL}/api/hostels/my-listings`, { headers });
         setHostels(resHostels.data);
         setFilteredHostels(resHostels.data);
         
         // Fetch host's received bookings
-        const resBookings = await axios.get('${import.meta.env.VITE_API_URL}/api/bookings/owner-bookings', { headers });
+        const resBookings = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings/owner-bookings`, { headers });
         setBookings(resBookings.data);
       } else {
         // Fetch all hostels for regular users
-        const resHostels = await axios.get('${import.meta.env.VITE_API_URL}/api/hostels');
+        const resHostels = await axios.get(`${import.meta.env.VITE_API_URL}/api/hostels`);
         setHostels(resHostels.data);
         setFilteredHostels(resHostels.data);
 
         // Fetch user's own bookings
-        const resMyBookings = await axios.get('${import.meta.env.VITE_API_URL}/api/bookings/my-bookings', { headers });
+        const resMyBookings = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings/my-bookings`, { headers });
         setMyBookings(resMyBookings.data);
       }
     } catch (error) {
@@ -111,7 +111,7 @@ function MainPage() {
     setActionLoading(true);
     try {
       const headers = { Authorization: `Bearer ${user.token}` };
-      const res = await axios.post('${import.meta.env.VITE_API_URL}/api/bookings', { hostelId }, { headers });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/bookings`, { hostelId }, { headers });
       showBanner(res.data.message || 'Booking requested successfully!', true);
       // Refresh list to update bookings and rooms available
       fetchData();
@@ -168,7 +168,7 @@ function MainPage() {
     setAiLoading(true);
 
     try {
-      const res = await axios.post('${import.meta.env.VITE_API_URL}/api/ai/chat', { message: userMessage });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/chat`, { message: userMessage });
       setChatMessages(prev => [...prev, { sender: 'ai', text: res.data.reply }]);
     } catch (err) {
       console.error(err);

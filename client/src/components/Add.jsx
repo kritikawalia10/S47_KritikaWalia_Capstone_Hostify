@@ -49,7 +49,7 @@ function Add() {
 
     try {
       const headers = { Authorization: `Bearer ${user.token}` };
-      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/hostels', data, { headers });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/hostels`, data, { headers });
 
       if (response.status === 201) {
         navigate('/main');
